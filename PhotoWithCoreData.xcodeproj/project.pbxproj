@@ -13,6 +13,10 @@
 		41A25034202ECF7A009DA163 /* PhotoWithCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 41A25032202ECF7A009DA163 /* PhotoWithCoreData.xcdatamodeld */; };
 		41A25036202ECF7A009DA163 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41A25035202ECF7A009DA163 /* Assets.xcassets */; };
 		41A25039202ECF7A009DA163 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41A25037202ECF7A009DA163 /* LaunchScreen.storyboard */; };
+		41F38243202ED5B6007B44DB /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F38242202ED5B6007B44DB /* CameraController.swift */; };
+		41F38246202ED6E9007B44DB /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F38245202ED6E9007B44DB /* CameraViewController.swift */; };
+		41F38248202ED7D1007B44DB /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41F38247202ED7D1007B44DB /* Camera.storyboard */; };
+		41F3824A202ED880007B44DB /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 41F38249202ED87F007B44DB /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		41A25035202ECF7A009DA163 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		41A25038202ECF7A009DA163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		41A2503A202ECF7A009DA163 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41F38242202ED5B6007B44DB /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		41F38245202ED6E9007B44DB /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		41F38247202ED7D1007B44DB /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
+		41F38249202ED87F007B44DB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +64,35 @@
 		41A2502A202ECF7A009DA163 /* PhotoWithCoreData */ = {
 			isa = PBXGroup;
 			children = (
+				41F38241202ED56C007B44DB /* ViewContollers */,
 				41A2502B202ECF7A009DA163 /* AppDelegate.swift */,
 				41A2502D202ECF7A009DA163 /* ViewController.swift */,
 				41A2502F202ECF7A009DA163 /* Main.storyboard */,
 				41A25035202ECF7A009DA163 /* Assets.xcassets */,
 				41A25037202ECF7A009DA163 /* LaunchScreen.storyboard */,
 				41A2503A202ECF7A009DA163 /* Info.plist */,
+				41F38249202ED87F007B44DB /* README.md */,
 				41A25032202ECF7A009DA163 /* PhotoWithCoreData.xcdatamodeld */,
 			);
 			path = PhotoWithCoreData;
+			sourceTree = "<group>";
+		};
+		41F38241202ED56C007B44DB /* ViewContollers */ = {
+			isa = PBXGroup;
+			children = (
+				41F38244202ED663007B44DB /* Camera */,
+			);
+			path = ViewContollers;
+			sourceTree = "<group>";
+		};
+		41F38244202ED663007B44DB /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				41F38242202ED5B6007B44DB /* CameraController.swift */,
+				41F38245202ED6E9007B44DB /* CameraViewController.swift */,
+				41F38247202ED7D1007B44DB /* Camera.storyboard */,
+			);
+			path = Camera;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,7 +156,9 @@
 			files = (
 				41A25039202ECF7A009DA163 /* LaunchScreen.storyboard in Resources */,
 				41A25036202ECF7A009DA163 /* Assets.xcassets in Resources */,
+				41F3824A202ED880007B44DB /* README.md in Resources */,
 				41A25031202ECF7A009DA163 /* Main.storyboard in Resources */,
+				41F38248202ED7D1007B44DB /* Camera.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,7 +170,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				41A25034202ECF7A009DA163 /* PhotoWithCoreData.xcdatamodeld in Sources */,
+				41F38246202ED6E9007B44DB /* CameraViewController.swift in Sources */,
 				41A2502E202ECF7A009DA163 /* ViewController.swift in Sources */,
+				41F38243202ED5B6007B44DB /* CameraController.swift in Sources */,
 				41A2502C202ECF7A009DA163 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
