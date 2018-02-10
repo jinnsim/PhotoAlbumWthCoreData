@@ -15,43 +15,56 @@ class CameraViewController: UIViewController {
  
     @IBOutlet fileprivate var toggleCameraButton: UIButton!
     @IBOutlet fileprivate var toggleFlashButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var photoCountLabel: UILabel!
     
     let cameraController = CameraController()
     var photoTakeCount = 0
     override var prefersStatusBarHidden: Bool { return true }
     
-}
-
-extension CameraViewController {
     override func viewDidLoad() {
-        
-        func configureCameraController() {
-            cameraController.prepare {(error) in
-                if let error = error {
-                    print(error)
-                }
-                
-                try? self.cameraController.displayPreview(on: self.capturePreviewView)
-            }
-        }
-        
-        func styleCaptureButton() {
-            captureButton.layer.borderColor = UIColor.black.cgColor
-            captureButton.layer.borderWidth = 2
-            
-            captureButton.layer.cornerRadius = min(captureButton.frame.width, captureButton.frame.height) / 2
-        }
-        func stylePhotoCountLabel() {
-            photoCountLabel.layer.borderColor = UIColor.black.cgColor
-            photoCountLabel.layer.borderWidth = 2
-            
-            photoCountLabel.layer.cornerRadius = min(photoCountLabel.frame.width, photoCountLabel.frame.height) / 2
-        }
-        styleCaptureButton()
+        styleButtons()
         stylePhotoCountLabel()
         configureCameraController()
         
+    }
+}
+
+extension CameraViewController {
+
+    func configureCameraController() {
+        cameraController.prepare {(error) in
+            if let error = error {
+                print(error)
+            }
+            
+            try? self.cameraController.displayPreview(on: self.capturePreviewView)
+        }
+    }
+    
+    func styleButtons() {
+        captureButton.layer.borderColor = UIColor.black.cgColor
+        captureButton.layer.borderWidth = 2
+        
+        captureButton.layer.cornerRadius = min(captureButton.frame.width, captureButton.frame.height) / 2
+        
+        cancelButton.layer.borderColor = UIColor.black.cgColor
+        cancelButton.layer.borderWidth = 2
+        
+        cancelButton.layer.cornerRadius = min(cancelButton.frame.width, cancelButton.frame.height) / 2
+        
+        doneButton.layer.borderColor = UIColor.black.cgColor
+        doneButton.layer.borderWidth = 2
+        
+        doneButton.layer.cornerRadius = min(doneButton.frame.width, doneButton.frame.height) / 2
+    }
+    
+    func stylePhotoCountLabel() {
+        photoCountLabel.layer.borderColor = UIColor.black.cgColor
+        photoCountLabel.layer.borderWidth = 2
+        
+        photoCountLabel.layer.cornerRadius = min(photoCountLabel.frame.width, photoCountLabel.frame.height) / 2
     }
 }
     
@@ -95,6 +108,7 @@ extension CameraViewController {
                 print(error ?? "Image capture error")
                 return
             }
+            CoreDataManager.shared.save(image: image)
            updatePhotoCountLabel()
         }
         
@@ -103,6 +117,13 @@ extension CameraViewController {
             self.photoCountLabel.text = "\(self.photoTakeCount)"
         }
     }
-        
+    
+    
+    @IBAction func touchedCancel(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    @IBAction func touchedDone(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
 }
 
