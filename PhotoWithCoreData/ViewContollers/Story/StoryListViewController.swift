@@ -12,6 +12,8 @@ import CoreData
 class StoryListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    var searchText: String? = nil
+    
     let searchController = UISearchController(searchResultsController: nil)
  
     // MARK: -
@@ -28,8 +30,8 @@ class StoryListViewController: UIViewController {
         let FirstSortDescriptor = NSSortDescriptor(key: "createdAt", ascending: false)
         let SecondSortDescriptor = NSSortDescriptor(key: "updatedAt", ascending: false)
         fetchRequest.sortDescriptors = [FirstSortDescriptor,SecondSortDescriptor]
-        
-        // Initialize Fetched Results Controller
+      
+       // Initialize Fetched Results Controller
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.coreDataManager.managedObjectContext, sectionNameKeyPath: "createdAt", cacheName: nil)
         
         // Configure Fetched Results Controller
@@ -98,6 +100,12 @@ extension StoryListViewController{
     }
     
     func loadFetchRequest(){
+        if searchText != nil {
+            fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "title CONTAINS[cd] %@ OR content CONTAINS[cd] %@", searchText!, searchText!)
+        }else{
+             fetchedResultsController.fetchRequest.predicate = nil
+        }
+        
         do {
             try fetchedResultsController.performFetch()
         } catch {
@@ -123,17 +131,21 @@ extension StoryListViewController{
 }
 
 extension StoryListViewController: UISearchBarDelegate {
-    // MARK: - UISearchBar Delegate
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        
-    }
+ 
 }
 
 extension StoryListViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
-      
+        let count: Int = (searchBar.text?.count)!
+        if count > 0 {
+            self.searchText = searchBar.text
+        }else{
+            self.searchText = nil
+        }
+        loadFetchRequest()
+        tableView.reloadData()
     }
 }
 
