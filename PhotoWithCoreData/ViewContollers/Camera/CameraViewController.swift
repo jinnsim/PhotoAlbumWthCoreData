@@ -7,7 +7,7 @@
 //
 
 import UIKit 
-
+typealias CreateStory = (Photos) -> Void
 class CameraViewController: UIViewController {
  
     @IBOutlet fileprivate var captureButton: UIButton!
@@ -21,6 +21,10 @@ class CameraViewController: UIViewController {
     
     let cameraController = CameraController()
     var photoTakeCount = 0
+    var photos = [Data]()
+    var story = Photos(context: CoreDataManager(modelName: "Story").managedObjectContext)
+    var createStory: CreateStory?
+    
     override var prefersStatusBarHidden: Bool { return true }
     
     override func viewDidLoad() {
@@ -29,6 +33,7 @@ class CameraViewController: UIViewController {
         configureCameraController()
         
     }
+  
 }
 
 extension CameraViewController {
@@ -108,7 +113,14 @@ extension CameraViewController {
                 print(error ?? "Image capture error")
                 return
             }
-            CoreDataManager.shared.save(image: image)
+            let newImageData = UIImageJPEGRepresentation(image,1)
+          
+            self.photos.append(newImageData!)
+            let encodedData = NSKeyedArchiver.archivedData(withRootObject: self.photos)
+           
+            self.story.updatedAt = Date().updateDate()
+            self.story.createdAt = Date().yearAndMonth()
+            self.story.photo = encodedData
            updatePhotoCountLabel()
         }
         
@@ -123,7 +135,8 @@ extension CameraViewController {
         self.dismiss(animated: true)
     }
     @IBAction func touchedDone(_ sender: Any) {
-        self.dismiss(animated: true)
+        if self.photos.count > 0 { self.createStory?(self.story) }
+        self.dismiss(animated: true) 
     }
 }
 
