@@ -66,7 +66,7 @@ extension StoryDetailViewController{
         newStory.content = cell.memoTextBox.text
         newStory.title = cell.titleTextField.text
         newStory.updatedAt = Date().updateDate()
-        newStory.createdAt = Date().yearAndMonth()
+        newStory.createdAt = story?.createdAt != nil ?  story?.createdAt : Date().yearAndMonth()  
         newStory.photo = self.story?.photo
         
         do {
