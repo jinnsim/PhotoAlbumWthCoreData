@@ -71,7 +71,8 @@ extension StoryListViewController: NSFetchedResultsControllerDelegate {
             break;
         case .delete:
               tableView.deleteRows(at: [indexPath!], with: .fade)
-              tableView.reloadData()
+              let indexSet: IndexSet = [(indexPath?.section)!]
+              tableView.reloadSections(indexSet, with: .none) 
             break;
         case .update:
             break;
@@ -172,11 +173,15 @@ extension StoryListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sections = fetchedResultsController.sections else {
-            return 0
+        if let sections = fetchedResultsController.sections    {
+            let sectionInfo = sections[section]
+            if sectionInfo.numberOfObjects > 0 {
+                 return sectionInfo.numberOfObjects
+            }
+           return 0
         }
-        let sectionInfo = sections[section]
-        return sectionInfo.numberOfObjects
+         return 0
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
