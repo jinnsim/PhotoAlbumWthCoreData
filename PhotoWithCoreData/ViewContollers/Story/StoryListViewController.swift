@@ -70,9 +70,14 @@ extension StoryListViewController: NSFetchedResultsControllerDelegate {
         case .insert: 
             break;
         case .delete:
-              tableView.deleteRows(at: [indexPath!], with: .fade)
-              let indexSet: IndexSet = [(indexPath?.section)!]
-              tableView.reloadSections(indexSet, with: .none) 
+            let indexSet: IndexSet = [(indexPath?.section)!]
+            
+            if tableView.numberOfRows(inSection: (indexPath?.section)!) == 1 {
+               tableView.deleteSections(indexSet, with: .none)
+                
+            }else{
+                tableView.reloadSections(indexSet, with: .none)
+            }
             break;
         case .update:
             break;
